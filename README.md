@@ -11,12 +11,10 @@
 - CSS
 
 ### Backend
-- Rust
-- (axum / actix-web などを使う予定ですが、変えるかも)
+- Rust(axum)
 
 ### Database
-- PostgreSQL
-- (もしかしたら)
+- PostgreSQL(sqlx)
 
 ## セットアップ
 
@@ -30,14 +28,3 @@ cargo run
 ### Frontend
 
 - 追加したら追加で書きます
-
-## API
-
-- GET /api/...
-- POST /api/...
-
-## 今後実装予定
-
--ログイン
--ユーザー登録
--検索
