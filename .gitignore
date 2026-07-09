@@ -85,4 +85,4 @@ notes.md
 # ============================================
 
 coverage/
-target/
+backend/target/
