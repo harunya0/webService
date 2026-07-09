@@ -1,7 +1,7 @@
 mod config;
-use dotenvy::dotenv;
 use sqlx::postgres::PgPoolOptions;
 use crate::config::Config;
+
 #[tokio::main]
 async fn main() {
     dotenvy::dotenv().ok();
@@ -19,4 +19,12 @@ async fn main() {
         .run(&pool)
         .await
         .expect("Failed to run database migrations");
+
+    if config.debug {
+        println!("JWT Secret: {}", config.jwt_secret);
+        println!("Port: {}", config.port);
+        println!("Debug: {}", config.debug);
+    } else {
+        println!("Debug mode is off. Not printing sensitive information.");
+    }
 }

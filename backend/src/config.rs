@@ -3,7 +3,7 @@ use std::env;
 
 pub struct Config {
     pub database_url: String,
-    pub api_key: String,
+    pub jwt_secret: String,
     pub port: u16,
     pub debug: bool,
 }
@@ -15,8 +15,8 @@ impl Config {
         Self {
             database_url: env::var("DATABASE_URL")
                 .expect("DATABASE_URL must be set"),
-            api_key: env::var("API_KEY")
-                .expect("API_KEY must be set"),
+            jwt_secret: env::var("JWT_SECRET")
+                .expect("JWT_SECRET must be set"),
             port: env::var("PORT")
                 .expect("PORT must be set")
                 .parse()
