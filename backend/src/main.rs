@@ -1,17 +1,22 @@
 mod config;
 use dotenvy::dotenv;
+use sqlx::postgres::PgPoolOptions;
 use crate::config::Config;
-fn main() {
-    dotenv().ok();
-
+#[tokio::main]
+async fn main() {
+    dotenvy::dotenv().ok();
     let config = Config::from_env();
 
-    if config.debug {
-        println!("Database URL: {}", config.database_url);
-        println!("API Key: {}", config.api_key);
-        println!("Port: {}", config.port);
-        println!("Debug: {}", config.debug);
-    } else {
-        println!("Debug mode is off. Not printing sensitive information.");
-    }
+    let database_url = config.database_url;
+
+    let pool = PgPoolOptions::new()
+        .max_connections(5)
+        .connect(&database_url)
+        .await
+        .expect("Failed to create database connection pool");
+
+    sqlx::migrate!("./migrations")
+        .run(&pool)
+        .await
+        .expect("Failed to run database migrations");
 }
