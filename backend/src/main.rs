@@ -1,4 +1,8 @@
 mod config;
+mod handlers;
+mod routes;
+mod utils;
+mod models;
 use sqlx::postgres::PgPoolOptions;
 use crate::config::Config;
 
